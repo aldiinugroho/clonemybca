@@ -44,7 +44,19 @@ target 'clonemybca' do
     # Pods for testing
   end
 
+  ENVFILES = {
+    'dev' => '$(PODS_ROOT)/../../.env.dev',
+    'prod' => '$(PODS_ROOT)/../../.env.prod',
+  }
+
   post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        if target.name == 'react-native-config'
+          config.build_settings['ENVFILE'] = ENVFILES[config.name]
+        end
+      end
+    end
     # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
     react_native_post_install(
       installer,
