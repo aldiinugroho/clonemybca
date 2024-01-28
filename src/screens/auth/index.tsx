@@ -42,6 +42,12 @@ function Index() {
 				}}>NU********I</Text>
 				<View style={{padding: 15}} />
 				<CTextview />
+				<View style={{padding: 8}} />
+				<Text style={{
+					fontSize: statefontsize.minimedium3,
+					color: statecustomcolor.daylightblue,
+					alignSelf: 'flex-end'
+				}}>{Language()?.auth?.tvpassreset}</Text>
 			</View>
 		</View>
 		</TouchableWithoutFeedback>

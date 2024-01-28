@@ -23,9 +23,11 @@ export const statefontsize: statefontsizeprops = {
 interface statecustomcolorprops {
   darkblue: string,
   lightblue: string,
+  daylightblue: string
 }
 
 export const statecustomcolor: statecustomcolorprops = {
   darkblue: '#134D83',
-  lightblue: '#006ACC'
+  lightblue: '#006ACC',
+  daylightblue: '#00C3F4'
 }

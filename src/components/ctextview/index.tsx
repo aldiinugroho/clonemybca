@@ -1,32 +1,36 @@
-import { Animated, Text, TextInput, View } from "react-native";
+import { Animated, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { statecustomcolor, statefontsize } from "../../state";
 import { Language } from "../../language";
 import { useRef, useState } from "react";
 
 function Index() {
   const transY = useRef(new Animated.Value(0))
-  const [focus,setfocus] = useState<boolean>(false)
+  const [filled,setfilled] = useState<boolean>(false)
+  const [showpass,setshowpass] = useState<boolean>(false)
+  const [fieldvalue,setfieldvalue] = useState<string>('')
 
   const handlefocus = () => {
-    setfocus(true)
+    setfilled(true)
     Animated.timing(transY.current, {
-      toValue: -20,
+      toValue: -25,
       duration: 300,
       useNativeDriver: true,
     }).start();
   }
 
-  const handleblur = () => {
-    setfocus(false)
-    Animated.timing(transY.current, {
-      toValue: 0,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
+  const handleblur = (value: string) => {
+    if (value.length === 0) {
+      setfilled(false)
+      Animated.timing(transY.current, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+    }
   }
 
   const transX = transY.current.interpolate({
-    inputRange: [-20,0],
+    inputRange: [-25,0],
     outputRange: [0,0],
     extrapolate: 'clamp'
   })
@@ -35,6 +39,7 @@ function Index() {
     <View>
       <Animated.View style={[
         {
+          // backgroundColor: 'orange',
           position: 'absolute',
           top: 0,
           bottom: 0,
@@ -48,7 +53,7 @@ function Index() {
         }
       ]}>
         <Text style={{
-          fontSize: focus ? statefontsize.minimedium3 : statefontsize.medium,
+          fontSize: filled ? statefontsize.minimedium3 : statefontsize.medium,
           padding: 5,
           paddingLeft: 0,
           color: statecustomcolor.lightblue,
@@ -60,11 +65,13 @@ function Index() {
         borderBottomWidth: 0.8,
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingBottom: 5
       }}>
         <TextInput 
           onFocus={handlefocus}
-          onBlur={handleblur}
+          onBlur={() => handleblur(fieldvalue)}
+          onChangeText={(text) => setfieldvalue(text)}
           style={{
             flex: 1,
             // backgroundColor: 'yellow',
@@ -72,8 +79,15 @@ function Index() {
             paddingLeft: 0,
             fontSize: statefontsize.medium
           }}
-          secureTextEntry={true}
+          secureTextEntry={!showpass}
         />
+        <TouchableOpacity 
+        onPress={() => setshowpass(!showpass)}
+        style={{
+          height: 30,
+          width: 30,
+          backgroundColor: 'black'
+        }}></TouchableOpacity>
       </View>
     </View>
   )
