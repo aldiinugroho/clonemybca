@@ -57,11 +57,13 @@ function Routes(): React.JSX.Element {
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator
         initialRouteName='Auth'
+        screenOptions={{
+          headerShown: false
+        }}
       >
         <Stack.Screen
           name='Auth'
           component={Screens.Auth}
-          options={{ title: 'Auth' }}
         />
         <Stack.Screen
           name='Home'

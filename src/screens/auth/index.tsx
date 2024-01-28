@@ -1,17 +1,51 @@
-import { Button, Text, View } from "react-native";
-import { goBack, navigateTo, popToTop, push } from "../../routes";
+import * as React from 'react';
+import { Button, Dimensions, FlatList, Keyboard, ScrollView, Text, TextInput, TouchableWithoutFeedback, View, useWindowDimensions } from 'react-native';
+import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import Carousel, { ICarouselInstance } from 'react-native-reanimated-carousel';
+import { AuthCarousel, AuthLang } from './components';
+import { Language } from '../../language';
+import { statecustomcolor, statefontsize } from '../../state';
+import { CTextview } from '../../components';
 
-function Index({navigation}: AuthScreenProps) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Auth Screen</Text>
-      <Button title="Go Home" onPress={() => push('Home')} />
-    </View>
-  );
+function Index() {
+
+	return (
+		<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+			<View style={{ 
+			display: 'flex',
+			flex: 1,
+		}}>
+			<AuthCarousel />
+			<View style={{
+				flex: 1,
+				padding: 25,
+				marginTop: -10,
+				borderTopLeftRadius: 10,
+				borderTopRightRadius: 10,
+				backgroundColor: 'white'
+			}}>
+				<AuthLang />
+				<Text style={{
+					color: statecustomcolor.darkblue,
+					fontSize: statefontsize.medium
+				}}>{Language()?.auth?.tvhello}</Text>
+				<View style={{padding: 5}} />
+				<Text style={{
+					fontWeight: 'bold',
+					fontSize: statefontsize.medium,
+					color: statecustomcolor.darkblue,
+				}}>ALDI NUGROHO</Text>
+				<View style={{padding: 2}} />
+				<Text style={{
+					fontSize: statefontsize.medium,
+					color: statecustomcolor.lightblue,
+				}}>NU********I</Text>
+				<View style={{padding: 15}} />
+				<CTextview />
+			</View>
+		</View>
+		</TouchableWithoutFeedback>
+	);
 }
 
-interface AuthScreenProps {
-  navigation: any
-}
-
-export default Index
+export default Index;
