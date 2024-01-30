@@ -11,7 +11,7 @@ interface storeLanguageProps {
 }
 
 export const storeLanguage = create<storeLanguageProps>()((set) => ({
-  defaultlang: 'ID',
+  defaultlang: LanguageSelector.EN,
   setvalue: (values: LanguageSelector) => {
     set({
       defaultlang: values

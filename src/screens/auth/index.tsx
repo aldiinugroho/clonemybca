@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button, Dimensions, FlatList, Keyboard, ScrollView, Text, TextInput, TouchableWithoutFeedback, View, useWindowDimensions } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import Carousel, { ICarouselInstance } from 'react-native-reanimated-carousel';
-import { AuthCarousel, AuthLang } from './components';
+import { AuthCarousel, AuthLang, Authloginfield } from './components';
 import { Language } from '../../language';
 import { statecustomcolor, statefontsize } from '../../state';
 import { CTextview } from '../../components';
@@ -41,13 +41,48 @@ function Index() {
 					color: statecustomcolor.lightblue,
 				}}>NU********I</Text>
 				<View style={{padding: 15}} />
-				<CTextview />
-				<View style={{padding: 8}} />
+				<Authloginfield />
+				<View style={{padding: 12}} />
 				<Text style={{
+					textAlign: 'center',
 					fontSize: statefontsize.minimedium3,
-					color: statecustomcolor.daylightblue,
-					alignSelf: 'flex-end'
-				}}>{Language()?.auth?.tvpassreset}</Text>
+					color: statecustomcolor.darkblue,
+					fontWeight: 'bold'
+				}}>
+					{Language()?.auth?.tvanotheracc}
+				</Text>
+				<View style={{padding: 35}} />
+				<View style={{
+					display: 'flex',
+					flexDirection: 'row',
+					backgroundColor: statecustomcolor.lightorange,
+					padding: 10,
+					borderRadius: 10,
+				}}>
+					<View style={{
+						width: 20,
+						height: 20,
+						borderRadius: 20,
+						backgroundColor: statecustomcolor.lightbrown
+					}}></View>
+					<View style={{padding: 5}} />
+					<View>
+						<Text style={{
+							color: statecustomcolor.lightbrown,
+							fontSize: statefontsize.minimedium2,
+						}}>{Language()?.auth?.tvupdatewarn1} <Text style={{
+							fontWeight: 'bold'
+						}}>{Language()?.auth?.tvbcaidpass}</Text> <Text>{Language()?.auth?.tvupdatewarn2}</Text></Text>
+						<Text style={{
+							color: statecustomcolor.darkblue,
+							fontSize: statefontsize.minimedium2,
+							textDecorationLine: 'underline',
+							fontWeight: '500'
+						}}>
+							{Language()?.auth?.tvmoreinfo}
+						</Text>
+					</View>
+				</View>
 			</View>
 		</View>
 		</TouchableWithoutFeedback>
